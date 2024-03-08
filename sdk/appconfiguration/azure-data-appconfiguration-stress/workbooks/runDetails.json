@@ -171,7 +171,7 @@
         "query": "customMetrics\r\n| where timestamp >= {timeRange:start} and timestamp <= {timeRange:end}\r\n| where name == \"test.run.duration\"\r\n| where cloud_RoleName startswith \"java-template\" and cloud_RoleName endswith \"{runId}\"\r\n| where customDimensions[\"error.type\"] == \"\"\r\n| summarize avg_duration = avg(valueSum/valueCount) * 1000 by bin(timestamp, 1m)\r\n| render timechart",
         "size": 0,
         "aggregation": 3,
-        "title": "Duration of successfull operation (ms)",
+        "title": "Duration of successful operation (ms)",
         "noDataMessageStyle": 5,
         "queryType": 0,
         "resourceType": "microsoft.insights/components"

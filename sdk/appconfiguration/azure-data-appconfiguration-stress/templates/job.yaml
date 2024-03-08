@@ -1,8 +1,9 @@
-{{- include "stress-test-addons.deploy-job-template.from-pod" (list . "stress.java-template") -}}
-{{- define "stress.java-template" -}}
+{{- include "stress-test-addons.deploy-job-template.from-pod" (list . "stress.java-ac") -}}
+{{- define "stress.java-ac" -}}
 metadata:
   labels:
-    testName: "{{ .Release.Name }}"
+    testInstance: "appconfiguration-{{ .Release.Name }}"
+    testName: "appconfiguration-stress-test"
 spec:
   containers:
     # simple and fast .NET Core HTTP server to run tests against
@@ -37,13 +38,13 @@ spec:
           -XX:InitialRAMPercentage=75.0 \
           -XX:MaxRAMPercentage=75.0 \
           -Dreactor.schedulers.defaultBoundedElasticSize={{ max 20 .Stress.concurrency }} \
-          -jar /app/azure-template-stress-1.0.0-beta.1-jar-with-dependencies.jar \
+          -jar /app/azure-data-appconfiguration-stress-1.0.0-beta.1-jar-with-dependencies.jar \
           {{ .Stress.testScenario }} \
           --parallel {{ .Stress.concurrency }} \
           --duration {{ mul .Stress.testDurationMin 60 }} \
           --endpoint https://localhost:8081 \
           {{ ternary "--sync" "" .Stress.sync }} \
-          --http-client {{ default "netty" .Stress.httpClient }} \
+          --http-client {{ default "vertx" .Stress.httpClient }} \
           --warmup 0
       # add your test parameters here
       resources:

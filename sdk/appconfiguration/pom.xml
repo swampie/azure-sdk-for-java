@@ -11,6 +11,7 @@
   <modules>
     <module>azure-data-appconfiguration</module>
     <module>azure-data-appconfiguration-perf</module>
+    <module>azure-data-appconfiguration-stress</module>
     <module>azure-resourcemanager-appconfiguration</module>
   </modules>
 </project>

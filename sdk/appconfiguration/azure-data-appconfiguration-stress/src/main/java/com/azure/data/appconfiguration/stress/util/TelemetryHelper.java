@@ -1,13 +1,13 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
-package com.azure.sdk.template.stress.util;
+package com.azure.data.appconfiguration.stress.util;
 
 import com.azure.core.util.CoreUtils;
 import com.azure.core.util.logging.ClientLogger;
 import com.azure.monitor.opentelemetry.exporter.AzureMonitorExporterBuilder;
 import com.azure.perf.test.core.PerfStressOptions;
-import com.azure.sdk.template.stress.StressOptions;
+import com.azure.data.appconfiguration.stress.StressOptions;
 import io.opentelemetry.api.GlobalOpenTelemetry;
 import io.opentelemetry.api.OpenTelemetry;
 import io.opentelemetry.api.common.AttributeKey;
@@ -101,7 +101,8 @@ public class TelemetryHelper {
                 //.addResourceCustomizer((resource, props) -> resource.toBuilder().put(AttributeKey.stringKey("service.instance.id"), "container-name-1").build())
                 .addSamplerCustomizer((sampler, props) -> new Sampler() {
                     @Override
-                    public SamplingResult shouldSample(Context parentContext, String traceId, String name, SpanKind spanKind, Attributes attributes, List<LinkData> parentLinks) {
+                    public SamplingResult shouldSample(Context parentContext, String traceId, String name,
+                                                       SpanKind spanKind, Attributes attributes, List<LinkData> parentLinks) {
                         if (Boolean.TRUE.equals(attributes.get(SAMPLE_IN_ATTRIBUTE))) {
                             return SamplingResult.recordAndSample();
                         }

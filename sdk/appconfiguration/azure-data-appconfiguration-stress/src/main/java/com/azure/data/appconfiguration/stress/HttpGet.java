@@ -1,7 +1,7 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
-package com.azure.sdk.template.stress;
+package com.azure.data.appconfiguration.stress;
 
 import com.azure.core.http.HttpHeaderName;
 import com.azure.core.http.HttpMethod;
@@ -16,7 +16,7 @@ import com.azure.core.http.policy.HttpPipelinePolicy;
 import com.azure.core.http.policy.RetryPolicy;
 import com.azure.core.util.Context;
 import com.azure.core.util.logging.ClientLogger;
-import com.azure.sdk.template.stress.util.TelemetryHelper;
+import com.azure.data.appconfiguration.stress.util.TelemetryHelper;
 import reactor.core.publisher.Mono;
 
 import java.net.MalformedURLException;

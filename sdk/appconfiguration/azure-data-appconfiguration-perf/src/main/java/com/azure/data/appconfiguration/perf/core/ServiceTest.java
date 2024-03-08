@@ -3,6 +3,8 @@
 
 package com.azure.data.appconfiguration.perf.core;
 
+import com.azure.core.http.policy.HttpLogDetailLevel;
+import com.azure.core.http.policy.HttpLogOptions;
 import com.azure.core.util.Configuration;
 import com.azure.core.util.CoreUtils;
 import com.azure.data.appconfiguration.ConfigurationAsyncClient;
@@ -36,7 +38,9 @@ public abstract class ServiceTest<TOptions extends PerfStressOptions> extends Pe
             throw new RuntimeException(String.format(CONFIGURATION_ERROR, "AZURE_APPCONFIG_CONNECTION_STRING"));
         }
 
-        ConfigurationClientBuilder builder = new ConfigurationClientBuilder().connectionString(connectionString);
+        ConfigurationClientBuilder builder = new ConfigurationClientBuilder()
+                .connectionString(connectionString)
+                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BODY_AND_HEADERS));
 
         this.configurationClient = builder.buildClient();
         this.configurationAsyncClient  = builder.buildAsyncClient();

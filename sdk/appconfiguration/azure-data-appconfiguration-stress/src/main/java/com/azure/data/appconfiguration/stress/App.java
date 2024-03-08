@@ -1,10 +1,10 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
-package com.azure.sdk.template.stress;
+package com.azure.data.appconfiguration.stress;
 
 import com.azure.perf.test.core.PerfStressProgram;
-import com.azure.sdk.template.stress.util.TelemetryHelper;
+import com.azure.data.appconfiguration.stress.util.TelemetryHelper;
 
 /**
  * Stress test application

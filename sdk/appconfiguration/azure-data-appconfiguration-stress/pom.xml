@@ -13,8 +13,8 @@
   </parent>
 
   <groupId>com.azure</groupId>
-  <artifactId>azure-template-stress</artifactId>
-  <version>1.0.0-beta.1</version> <!-- {x-version-update;com.azure:azure-template-stress;current} -->
+  <artifactId>azure-data-appconfiguration-stress</artifactId>
+  <version>1.0.0-beta.1</version> <!-- {x-version-update;com.azure:azure-data-appconfiguration-stress;current} -->
   <packaging>jar</packaging>
 
   <properties>
@@ -24,6 +24,12 @@
   </properties>
 
   <dependencies>
+    <dependency>
+      <groupId>com.azure</groupId>
+      <artifactId>azure-data-appconfiguration</artifactId>
+      <version>1.5.2</version> <!-- {x-version-update;com.azure:azure-data-appconfiguration;dependency} -->
+    </dependency>
+
     <dependency>
       <groupId>ch.qos.logback</groupId>
       <artifactId>logback-classic</artifactId>
@@ -118,7 +124,7 @@
         <configuration>
           <transformers>
             <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-              <mainClass>com.azure.sdk.template.stress.App</mainClass>
+              <mainClass>com.azure.data.appconfiguration.stress.App</mainClass>
             </transformer>
             <transformer implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer"/>
           </transformers>

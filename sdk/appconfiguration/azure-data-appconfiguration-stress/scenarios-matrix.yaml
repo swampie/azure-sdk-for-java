@@ -1,7 +1,7 @@
 displayNames:
   True: "sync"
   False: "async"
-  java-template: ""
+  java-ac: ""
   dockerfiles/java21: jre21
   dockerfiles/java11: jre11
 matrix:

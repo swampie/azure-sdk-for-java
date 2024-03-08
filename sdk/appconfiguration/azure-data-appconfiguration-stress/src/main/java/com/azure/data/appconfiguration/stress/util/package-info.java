@@ -4,4 +4,4 @@
 /**
  * Contains classes for stress tests utils.
  */
-package com.azure.sdk.template.stress.util;
+package com.azure.data.appconfiguration.stress.util;

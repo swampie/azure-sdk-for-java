@@ -179,7 +179,7 @@ While some Azure SDKs provide custom metrics, we're going to collect generic tes
 so it's important to reuse the same metric across different tests whenever possible.
 
 We need just one generic metric for basic analysis - the one that measures duration of one test execution (with additional dimensions).
-It's implemented in `com.azure.sdk.template.stress.util.TelemetryHelper` and has the following semantic:
+It's implemented in `util.com.azure.data.appconfiguration.stress.TelemetryHelper` and has the following semantic:
 - name: `test.run.duration` - it is used in the stress workbook, so make sure to use the same name when applicable
 - unit: seconds
 - customDimensions:
