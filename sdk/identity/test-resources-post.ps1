@@ -119,42 +119,44 @@ if ($IsMacOS -eq $false) {
     # Create the federated identity
     Write-Host "Creating federated identity"
     az identity federated-credential create --name $MIName --identity-name $MIName --resource-group $DeploymentOutputs['IDENTITY_RESOURCE_GROUP'] --issuer $AKS_OIDC_ISSUER --subject system:serviceaccount:default:workload-identity-sa
+}
 
-    # Build the kubernetes deployment yaml
-    $kubeConfig = @"
-    apiVersion: v1
-    kind: ServiceAccount
-    metadata:
-      annotations:
-        azure.workload.identity/client-id: $MIClientId
-      name: $SaAccountName
-      namespace: default
-    ---
-    apiVersion: v1
-    kind: Pod
-    metadata:
-      name: $PodName
-      namespace: default
-      labels:
-        azure.workload.identity/use: "true"
-    spec:
-      serviceAccountName: $SaAccountName
-      containers:
-      - name: $PodName
-        image: $image
-        env:
-        - name: AZURE_TEST_MODE
-          value: "LIVE"
-        - name: IS_RUNNING_IN_IDENTITY_CLUSTER
-          value: "true"
-        command: ["tail"]
-        args: ["-f", "/dev/null"]
-        ports:
-        - containerPort: 80
-      nodeSelector:
-        kubernetes.io/os: linux
+# Build the kubernetes deployment yaml
+$kubeConfig = @"
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  annotations:
+    azure.workload.identity/client-id: $MIClientId
+  name: $SaAccountName
+  namespace: default
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: $PodName
+  namespace: default
+  labels:
+    azure.workload.identity/use: "true"
+spec:
+  serviceAccountName: $SaAccountName
+  containers:
+  - name: $PodName
+    image: $image
+    env:
+    - name: AZURE_TEST_MODE
+      value: "LIVE"
+    - name: IS_RUNNING_IN_IDENTITY_CLUSTER
+      value: "true"
+    command: ["tail"]
+    args: ["-f", "/dev/null"]
+    ports:
+    - containerPort: 80
+  nodeSelector:
+    kubernetes.io/os: linux
 "@
 
+if ($IsMacOS -eq $false) {
     Set-Content -Path "$livetestappsRoot/kubeconfig.yaml" -Value $kubeConfig
     Write-Host "Created kubeconfig.yaml with contents:"
     Write-Host $kubeConfig
@@ -162,9 +164,7 @@ if ($IsMacOS -eq $false) {
     # Apply the config
     kubectl apply -f "$livetestappsRoot/kubeconfig.yaml" --overwrite=true
     Write-Host "Applied kubeconfig.yaml"
-
 }
-
 
 
 # Define a list of root directories
