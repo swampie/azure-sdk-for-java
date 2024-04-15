@@ -88,7 +88,7 @@ az storage container create --name "vmcontainer" --account-name $DeploymentOutpu
 Write-Host "Uploading file to storage"
 az storage blob upload --container-name "vmcontainer" --file "$vmRoot/target/identity-test-vm-1.0-SNAPSHOT-jar-with-dependencies.jar" --name "testfile.jar" --account-name $DeploymentOutputs['IDENTITY_STORAGE_NAME_1'] --account-key $key | Write-Host
 
-if ($IsMacOS -neq $true) {
+if ($IsMacOS -eq $false) {
 
     mvn clean package -f "$aksRoot/pom.xml" | Write-Host
 
