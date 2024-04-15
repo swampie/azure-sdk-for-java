@@ -153,7 +153,7 @@ if ($IsMacOS -eq $false) {
         - containerPort: 80
       nodeSelector:
         kubernetes.io/os: linux
-    "@
+"@
 
     Set-Content -Path "$livetestappsRoot/kubeconfig.yaml" -Value $kubeConfig
     Write-Host "Created kubeconfig.yaml with contents:"
