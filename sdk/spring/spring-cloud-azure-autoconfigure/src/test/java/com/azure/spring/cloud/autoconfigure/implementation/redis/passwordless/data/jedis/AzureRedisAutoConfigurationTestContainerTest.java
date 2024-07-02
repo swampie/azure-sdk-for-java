@@ -5,11 +5,7 @@ package com.azure.spring.cloud.autoconfigure.implementation.redis.passwordless.d
 
 import com.azure.identity.extensions.implementation.template.AzureAuthenticationTemplate;
 import com.azure.spring.cloud.autoconfigure.redis.AzureJedisPasswordlessAutoConfiguration;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.MethodOrderer;
-import org.junit.jupiter.api.Order;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestMethodOrder;
+import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.condition.DisabledOnOs;
 import org.junit.jupiter.api.condition.OS;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +18,6 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.test.context.DynamicPropertyRegistry;
 import org.springframework.test.context.DynamicPropertySource;
 import org.testcontainers.containers.GenericContainer;
-import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
 import org.testcontainers.utility.DockerImageName;
 
@@ -43,16 +38,23 @@ public class AzureRedisAutoConfigurationTestContainerTest {
 
     private static final String REDIS_PASSWORD = "fake-testcontainer-password";
 
-
     /**
      * Pulling Docker registry name from testcontainers.properties file as prefix.
      */
-    @Container
-    private static GenericContainer<?> redis =
+    private final static GenericContainer<?> redis =
         new GenericContainer<>(DockerImageName.parse("redis:6"))
             .withCommand("--requirepass", REDIS_PASSWORD)
             .withExposedPorts(6379);
 
+    @BeforeAll
+    public static void beforeAll() {
+        redis.start();
+    }
+
+    @AfterAll
+    public static void afterAll() {
+        redis.stop();
+    }
 
     @DynamicPropertySource
     static void redisProperties(DynamicPropertyRegistry registry) {
@@ -81,7 +83,6 @@ public class AzureRedisAutoConfigurationTestContainerTest {
         String value = (String) redisTemplate.opsForValue().get("valueMap3");
         Assertions.assertEquals("map3", value);
     }
-
 
     @Configuration
     @Import({AzureJedisPasswordlessAutoConfiguration.class, RedisAutoConfiguration.class})
