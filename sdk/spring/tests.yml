@@ -19,7 +19,7 @@ stages:
               python ./sdk/spring/scripts/compatibility_update_supported_version_matrix_json.py -m 3
             displayName: 'Update test support version'
           - script: |
-              python ./sdk/spring/scripts/convert_json_to_env_vars.py config.json
+              python ./sdk/spring/scripts/convert_json_to_env_vars.py ./sdk/spring/pipeline/supported-version-matrix.json
               displayName: 'Convert supported JSON file to Environment Variables'
           - powershell: |
               Write-Host "SPRING_CLOUD_AZURE_TEST_SUPPORTED_SPRING_BOOT_VERSION: $env:SPRING_CLOUD_AZURE_TEST_SUPPORTED_SPRING_BOOT_VERSION"
