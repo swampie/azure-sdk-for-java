@@ -1,15 +1,15 @@
 trigger: none
 
 extends:
-  template: ./eng/pipelines/templates/stages/1es-redirect.yml
+  template: ../../eng/pipelines/templates/stages/1es-redirect.yml
   parameters:
     stages:
       - stage: "Get version that supports Spring Boot and Spring Cloud"
         variables:
-            - template: ./eng/pipelines/templates/variables/globals.yml
+            - template: ../../eng/pipelines/templates/variables/globals.yml
         jobs:
             steps:
-              - template: ./eng/common/pipelines/templates/steps/sparse-checkout.yml
+              - template: ../../eng/common/pipelines/templates/steps/sparse-checkout.yml
                 parameters:
                   Paths:
                     - 'sdk/spring/pipeline'
