@@ -6,10 +6,10 @@ extends:
     stages:
       - stage: "Get version that supports Spring Boot and Spring Cloud"
         variables:
-            - template: ../../eng/pipelines/templates/variables/globals.yml
+            - template: ./templates/variables/globals.yml
         jobs:
             steps:
-              - template: ../../eng/common/pipelines/templates/steps/sparse-checkout.yml
+              - template: ../common/pipelines/templates/steps/sparse-checkout.yml
                 parameters:
                   Paths:
                     - 'sdk/spring/pipeline'
