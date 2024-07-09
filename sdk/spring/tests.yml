@@ -5,9 +5,9 @@ extends:
   parameters:
     stages:
       - stage: "Get version that supports Spring Boot and Spring Cloud"
+        variables:
+            - template: ../../../eng/pipelines/templates/variables/globals.yml
         jobs:
-          - variables:
-              - template: ../../../eng/pipelines/templates/variables/globals.yml
             steps:
               - template: /eng/common/pipelines/templates/steps/sparse-checkout.yml
                 parameters:
