@@ -21,7 +21,7 @@ stages:
           - script: |
               python ./sdk/spring/scripts/convert_json_to_env_vars.py ./sdk/spring/pipeline/supported-version-matrix.json
             displayName: 'Convert supported JSON file to Environment Variables'
-          - script: echo $(SPRING_CLOUD_AZURE_TEST_SUPPORTED_SPRING_BOOT_VERSION)
+          - bash: |
+              echo "$(SPRING_CLOUD_AZURE_TEST_SUPPORTED_SPRING_BOOT_VERSION)"
+              echo "$(SPRING_CLOUD_AZURE_TEST_SUPPORTED_SPRING_CLOUD_VERSION)"
             displayName: 'Show Environment Variables'
-          - script: echo $(SPRING_CLOUD_AZURE_TEST_SUPPORTED_SPRING_CLOUD_VERSION)
-            displayName: 'Show 2Environment Variables'
