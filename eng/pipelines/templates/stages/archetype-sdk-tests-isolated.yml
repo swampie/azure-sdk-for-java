@@ -120,6 +120,9 @@ parameters:
 - name: UseFederatedAuth
   type: boolean
   default: false
+- name: AdditionalSparseCheckoutPaths
+  type: object
+  default: []
 
 stages:
 - ${{ each cloud in parameters.CloudConfig }}:
@@ -146,6 +149,7 @@ stages:
               - "sdk/${{ parameters.ServiceDirectory }}/**/*.json"
               - '!sdk/**/test-recordings/*'
               - '!sdk/**/session-records/*'
+              - ${{ parameters.AdditionalSparseCheckoutPaths }}
             JobTemplatePath: /eng/pipelines/templates/jobs/live.tests.yml
             AdditionalParameters:
               PreSteps:

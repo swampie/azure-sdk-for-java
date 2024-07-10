@@ -57,6 +57,8 @@ extends:
               displayName: 'update test version'
           MatrixFilters:
             - JavaTestVersion=^(?!1.8|1.11).*
+          AdditionalSparseCheckoutPaths:
+            - 'sdk/spring'
           PreSteps:
             - script: |
                 python -m pip install termcolor
