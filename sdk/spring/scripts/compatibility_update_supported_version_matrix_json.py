@@ -30,7 +30,7 @@ def change_to_repo_root_dir():
 def update_supported_version_matrix_json_file(filepath, suppoerted_spring_boot_version):
     names = {}
     for version in suppoerted_spring_boot_version:
-        names[version] = "springboot" + version.replace(".", "_")
+        names[version] = "SpringBoot" + version.replace(".", "_")
     with open(filepath, 'r') as file:
         data = json.load(file)
         data['displayNames'] = names
