@@ -5,6 +5,9 @@ parameters:
   - name: PreSteps
     type: object
     default: []
+  - name: EnvVars
+    type: object
+    default: {}
   - name: Artifacts
     type: object
     default: []
@@ -55,6 +58,7 @@ stages:
       ServiceDirectory: spring
       TestName: ${{ parameters.TestName }}
       BuildOptions: '-Denforcer.skip=true'
+      EnvVars: ${{ parameters.EnvVars }}
       TestGoals: "clean verify"
       TestOptions: ${{ parameters.TestOptions }}
       MatrixConfigs: ${{ parameters.MatrixConfigs }}

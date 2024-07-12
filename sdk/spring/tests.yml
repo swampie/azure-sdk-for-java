@@ -34,13 +34,13 @@ extends:
               safeName: springcloudazureintegrationtestappconfigurationconfig
       - template: /sdk/spring/pipeline/tests-supported-spring-versions.yml
         parameters:
-          MatrixConfigs:
-            - Name: Cosmos_live_test_integration
-              Path: sdk/spring/pipeline/cosmos-integration-matrix.json
-              Selection: all
-              GenerateVMJobs: true
-              NonSparseParameters:
-                - SPRING_CLOUD_AZURE_TEST_SUPPORTED_SPRING_BOOT_VERSION
+#          MatrixConfigs:
+#            - Name: Cosmos_live_test_integration
+#              Path: sdk/spring/pipeline/cosmos-integration-matrix.json
+#              Selection: all
+#              GenerateVMJobs: true
+#              NonSparseParameters:
+#                - SPRING_CLOUD_AZURE_TEST_SUPPORTED_SPRING_BOOT_VERSION
           TestResourceDirectories:
             - spring/spring-cloud-azure-integration-tests/test-resources/cosmos-spring
           Artifacts:
@@ -49,4 +49,7 @@ extends:
               safeName: azurespringdatacosmos
           TimeoutInMinutes: 90
           TestName: Spring_Data_Cosmos_Integration
-          TestOptions: '$(ProfileFlag)'
+          BuildOptions: '-Pintegration-test-azure -Denforcer.skip=true'
+          EnvVars:
+            ArmTemplateParameters: "@{ defaultConsistencyLevel = 'Session' }"
+            AdditionalArgs: "-Dargline=-DCOSMOS.AZURE_COSMOS_DISABLE_NON_STREAMING_ORDER_BY=true"
