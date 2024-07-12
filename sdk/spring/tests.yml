@@ -4,9 +4,9 @@ extends:
   template: /eng/pipelines/templates/stages/1es-redirect.yml
   parameters:
     stages:
-      - template: /sdk/spring/pipeline/tests-supported-spring-versions.yml #NOTE: Non-standard template.
+      - template: /sdk/spring/pipeline/tests-supported-spring-versions.yml
         parameters:
-          TestName: Spring_IT
+          TestName: Spring_Integration
           TimeoutInMinutes: 240
           TestOptions: "-DskipSpringITs=false -Dcompiler.failondeprecatedstatus=-"
           TestResourceDirectories:
@@ -23,10 +23,32 @@ extends:
             - name: spring-cloud-azure-integration-tests
               groupId: com.azure.spring
               safeName: springcloudazureintegrationtests
+      - template: /sdk/spring/pipeline/tests-supported-spring-versions.yml
+        parameters:
+          TestName: Spring_App_Config_Integration
+          TestResourceDirectories:
+            - spring/spring-cloud-azure-integration-test-appconfiguration-config
+          Artifacts:
+            - name: spring-cloud-azure-integration-test-appconfiguration-config
+              groupId: com.azure.spring
+              safeName: springcloudazureintegrationtestappconfigurationconfig
+      - template: /sdk/spring/pipeline/tests-supported-spring-versions.yml
+        parameters:
           MatrixConfigs:
-            - Name: spring_boot_supported_version_tests
-              Path: sdk/spring/pipeline/supported-version-matrix.json
-              Selection: sparse
+            - Name: Cosmos_live_test_integration
+              Path: sdk/spring/pipeline/cosmos-integration-matrix.json
+              Selection: all
+              GenerateVMJobs: true
               NonSparseParameters:
                 - SPRING_CLOUD_AZURE_TEST_SUPPORTED_SPRING_BOOT_VERSION
-              GenerateVMJobs: true
+          TestResourceDirectories:
+            - spring/spring-cloud-azure-integration-tests/test-resources/cosmos-spring
+          Artifacts:
+            - name: azure-spring-data-cosmos
+              groupId: com.azure
+              safeName: azurespringdatacosmos
+          TimeoutInMinutes: 90
+          PreSteps:
+            - template: /eng/pipelines/templates/steps/install-reporting-tools.yml
+          TestName: Spring_Data_Cosmos_Integration
+          TestOptions: '$(ProfileFlag)'

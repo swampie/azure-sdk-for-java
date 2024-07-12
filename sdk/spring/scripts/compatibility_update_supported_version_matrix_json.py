@@ -20,7 +20,8 @@ from compatibility_get_spring_cloud_version import get_spring_cloud_version
 
 def get_args():
     parser = argparse.ArgumentParser()
-    parser.add_argument('-m', '--spring-boot-major-version', type = str, default='3')
+    parser.add_argument('-m', '--spring-boot-major-version', type=str, default='3')
+    parser.add_argument('-mcp', '--matrix-config-path', type=str, default='supported-version-matrix.json')
     return parser.parse_args()
 
 
@@ -58,7 +59,7 @@ def main():
     change_to_repo_root_dir()
     log.debug('Current working directory = {}.'.format(os.getcwd()))
     suppoerted_spring_boot_version = get_supported_spring_boot_version("https://raw.githubusercontent.com/Azure/azure-sdk-for-java/main/sdk/spring/pipeline/spring-cloud-azure-supported-spring.json")
-    update_supported_version_matrix_json_file("./sdk/spring/pipeline/supported-version-matrix.json", suppoerted_spring_boot_version)
+    update_supported_version_matrix_json_file(get_args().matrix_config_path, suppoerted_spring_boot_version)
     elapsed_time = time.time() - start_time
     log.info('elapsed_time = {}'.format(elapsed_time))
 
