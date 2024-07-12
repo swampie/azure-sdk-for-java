@@ -15,6 +15,8 @@ import json
 import argparse
 import requests
 
+from compatibility_get_spring_cloud_version import get_spring_cloud_version
+
 
 def get_args():
     parser = argparse.ArgumentParser()
@@ -29,14 +31,15 @@ def change_to_repo_root_dir():
 
 def update_supported_version_matrix_json_file(filepath, suppoerted_spring_boot_version):
     names = {}
-    for version in suppoerted_spring_boot_version:
-        names[version] = "springboot" + version.replace(".", "_")
+    for boot_version in suppoerted_spring_boot_version:
+        cloud_version = get_spring_cloud_version(boot_version)
+        names[boot_version] = "SpringBoot" + boot_version.replace(".", "_") + "_Cloud" + cloud_version.replace(".", "_")
     with open(filepath, 'r') as file:
         data = json.load(file)
         data['displayNames'] = names
         data['matrix']['SPRING_CLOUD_AZURE_TEST_SUPPORTED_SPRING_BOOT_VERSION'] = suppoerted_spring_boot_version
     with open(filepath, 'w') as file:
-        json.dump(data, file, indent = 2)
+        json.dump(data, file, indent=2)
 
 
 def get_supported_spring_boot_version(filepath):
