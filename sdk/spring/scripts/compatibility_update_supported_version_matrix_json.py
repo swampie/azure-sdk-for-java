@@ -21,7 +21,7 @@ from compatibility_get_spring_cloud_version import get_spring_cloud_version
 def get_args():
     parser = argparse.ArgumentParser()
     parser.add_argument('-m', '--spring-boot-major-version', type=str, default='3')
-    parser.add_argument('-mcp', '--matrix-config-path', type=str, default='sdk/spring/pipeline/supported-version-matrix.json')
+    parser.add_argument('-mcp', '--matrix-config-path', type=str, default='pipeline/supported-version-matrix.json')
     return parser.parse_args()
 
 
