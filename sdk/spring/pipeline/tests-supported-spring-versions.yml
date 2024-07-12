@@ -14,6 +14,9 @@ parameters:
   - name: TimeoutInMinutes
     type: number
     default: 60
+  - name: BuildOptions
+    type: string
+    default: '-Denforcer.skip=true'
   - name: TestResourceDirectories
     type: object
     default:
@@ -57,7 +60,7 @@ stages:
       TimeoutInMinutes: ${{ parameters.TimeoutInMinutes }}
       ServiceDirectory: spring
       TestName: ${{ parameters.TestName }}
-      BuildOptions: '-Denforcer.skip=true'
+      BuildOptions: ${{ parameters.BuildOptions }}
       EnvVars: ${{ parameters.EnvVars }}
       TestGoals: "clean verify"
       TestOptions: ${{ parameters.TestOptions }}
