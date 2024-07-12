@@ -4,7 +4,7 @@ extends:
   template: /eng/pipelines/templates/stages/1es-redirect.yml
   parameters:
     stages:
-      - template: sdk/spring/pipeline/tests-supported-spring-versions.yml #NOTE: Non-standard template.
+      - template: /sdk/spring/pipeline/tests-supported-spring-versions.yml #NOTE: Non-standard template.
         parameters:
           TestName: Spring_IT
           TimeoutInMinutes: 240

@@ -2,6 +2,9 @@ parameters:
   - name: TestName
     type: string
     default: 'SpringTest'
+  - name: Artifacts
+    type: object
+    default: []
   - name: TimeoutInMinutes
     type: number
     default: 60
