@@ -3,11 +3,6 @@
 
   },
   "matrix": {
-    "Agent": {
-      "ubuntu-20.04": { "OSVmImage": "env:LINUXVMIMAGE", "Pool": "env:LINUXPOOL" },
-      "windows-2022": { "OSVmImage": "env:WINDOWSVMIMAGE", "Pool": "env:WINDOWSPOOL" },
-      "macos-latest": { "OSVmImage": "env:MACVMIMAGE", "Pool": "env:MACPOOL" }
-    },
     "Cosmos": {
       "Session_Integration": {
         "ArmTemplateParameters": "@{ defaultConsistencyLevel = 'Session' }",
