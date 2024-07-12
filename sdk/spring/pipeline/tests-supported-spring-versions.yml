@@ -2,6 +2,9 @@ parameters:
   - name: TestName
     type: string
     default: 'SpringTest'
+  - name: PreSteps
+    type: object
+    default: []
   - name: Artifacts
     type: object
     default: []
@@ -67,6 +70,7 @@ stages:
       AdditionalSparseCheckoutPaths:
         - 'sdk/spring'
       PreSteps:
+        - ${{ parameters.PreSteps }}
         - script: |
             python -m pip install termcolor requests
           displayName: 'Install python module'

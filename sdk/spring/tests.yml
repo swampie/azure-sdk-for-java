@@ -48,7 +48,5 @@ extends:
               groupId: com.azure
               safeName: azurespringdatacosmos
           TimeoutInMinutes: 90
-          PreSteps:
-            - template: /eng/pipelines/templates/steps/install-reporting-tools.yml
           TestName: Spring_Data_Cosmos_Integration
           TestOptions: '$(ProfileFlag)'
