@@ -18,7 +18,7 @@ parameters:
     type: object
     default:
       - Name: Spring_Boot_Supported_Version_Tests
-        Path: pipeline/supported-version-matrix.json
+        Path: sdk/spring/pipeline/supported-version-matrix.json
         Selection: sparse
         GenerateVMJobs: true
         NonSparseParameters:
